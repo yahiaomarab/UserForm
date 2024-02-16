@@ -1,0 +1,15 @@
+
+.password-container{
+    position:relative;
+    .eye-icon{
+        position:absolute;
+        top: 30%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+    .form-control {
+        padding-right: 30px; /* Adjust the padding to make space for the eye icon */
+      }
+}
+

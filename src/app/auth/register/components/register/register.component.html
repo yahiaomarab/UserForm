@@ -1,0 +1,246 @@
+<section class="vh-100" style="background-color: #ddd">
+  <div class="container h-100">
+    <div
+      class="row d-flex justify-content-center align-items-center h-100 w-100"
+    >
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                alt="login form"
+                class="img-fluid"
+                style="border-radius: 1rem 0 0 1rem"
+              />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+                <form [formGroup]="formRegister" (ngSubmit)="register()">
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <i
+                      class="fas fa-cubes fa-2x me-3"
+                      style="color: #ff6219"
+                    ></i>
+                    <span class="h1 fw-bold mb-0">Market</span>
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                    Sign Up To your account
+                  </h5>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example17">Name</label>
+                    <input
+                      name="name"
+                      type="name"
+                      class="form-control"
+                      placeholder="Enter your name"
+                      formControlName="name"
+                      name
+                      maxlength="100"
+                      [ngClass]="{
+                        'is-invalid':
+                          (isRegister && formRegister.controls.name.errors) ||
+                          (formRegister.controls.name.touched &&
+                            formRegister.controls.name.errors)
+                      }"
+                    />
+                    <div
+                      class="invalid-feedback validation"
+                      *ngIf="
+                        (isRegister && formRegister.controls.name.errors) ||
+                        (formRegister.controls.name.touched &&
+                          formRegister.controls.name.errors)
+                      "
+                    >
+                      <div
+                        *ngIf="name?.hasError('required')"
+                      >
+                        This field is required
+                      </div>
+                      <div
+                        *ngIf="
+                          name?.hasError('signedBefore')
+                        "
+                      >
+                        This name is already signed in before
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example17"
+                      >Email address</label
+                    >
+                    <input
+                      type="email"
+                      id="form2Example17"
+                      class="form-control"
+                      email
+                      placeholder="Enter your email"
+                      formControlName="email"
+                      maxlength="100"
+                      [ngClass]="{
+                        'is-invalid':
+                          (isRegister && formRegister.controls.email.errors) ||
+                          (formRegister.controls.email.touched &&
+                            formRegister.controls.email.errors)
+                      }"
+                    />
+                    <div
+                      class="invalid-feedback validation"
+                      *ngIf="
+                        (isRegister && formRegister.controls.email.errors) ||
+                        (formRegister.controls.email.touched &&
+                          formRegister.controls.email.errors)
+                      "
+                    >
+                      <div
+                        *ngIf="email?.hasError('required')"
+                      >
+                        This field is required
+                      </div>
+                      <div
+                        *ngIf="
+                         email
+                            ?.hasError('notEndingWithDotCom')
+                        "
+                      >
+                        This email must end with .com
+                      </div>
+                      <div
+                        *ngIf="
+                          email?.hasError('invalidEmail')
+                        "
+                      >
+                        This email is invaild
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="password-container">
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example27"
+                        >Password</label
+                      >
+                      <input
+                        type="{{ visiable ? 'text' : 'password' }}"
+                        id="form2Example27"
+                        class="form-control"
+                        placeholder="Enter your password"
+                        Password
+                        formControlName="Password"
+                        maxlength="100"
+                        [ngClass]="{
+                          'is-invalid':
+                            (isRegister &&
+                              formRegister.controls.Password.errors) ||
+                            (formRegister.controls.Password.touched &&
+                              formRegister.controls.Password.errors)
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback validation"
+                        *ngIf="
+                          (isRegister &&
+                            formRegister.controls.Password.errors) ||
+                          (formRegister.controls.Password.touched &&
+                            formRegister.controls.Password.errors)
+                        "
+                      >
+                        <div
+                          *ngIf="
+                           Password?.hasError('required')
+                          "
+                        >
+                          This field is required
+                        </div>
+                        <div
+                          *ngIf="
+                           Password?.hasError('atleast8')
+                          "
+                        >
+                          Password must at lest 8 length
+                        </div>
+                        <div
+                          *ngIf="
+                           Password
+                              ?.hasError('specialChar')
+                          "
+                        >
+                          Password must has at least special character
+                        </div>
+                        <div
+                          *ngIf="
+                           Password?.hasError('hasNumber')
+                          "
+                        >
+                          Password must has number
+                        </div>
+                      </div>
+                      <span
+                        class="eye-icon"
+                        (click)="changePasswordVisibility()"
+                      >
+                        <i [ngClass]="kindIcon"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="confirmPassword">
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example28"
+                        >Confirm Password</label
+                      >
+                      <input
+                        type="{{ confirmVisible ? 'text' : 'password' }}"
+                        id="form2Example28"
+                        class="form-control"
+                        confirmPassword
+                        placeholder="Enter your confirm password"
+                        formControlName="confirmPassword"
+                        [ngClass]="{
+                          'is-invalid':
+                            (isRegister &&
+                              formRegister.controls.confirmPassword.errors) ||
+                            (formRegister.controls.confirmPassword.touched &&
+                              formRegister.controls.confirmPassword.errors)
+                        }"
+                      />
+                      <div
+                      class="invalid-feedback validation"
+                      *ngIf="(isRegister && formRegister.controls.confirmPassword.errors) || (formRegister.controls.confirmPassword.touched && formRegister.controls.confirmPassword.errors)"
+                    >
+                      <div *ngIf="confirmPassword?.errors?.['required']">This field is required</div>
+                      <div *ngIf="confirmPassword?.errors?.['notMatched']">Passwords must match</div>
+                    </div>
+                    
+                      <span
+                        class="eye-icon"
+                        (click)="changeConfirmPasswordVisibility()"
+                      >
+                        <i [ngClass]="confirmKindIcon"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button
+                      class="btn btn-dark w-100 btn-block"
+                      type="submit"
+                      [disabled]="formRegister.invalid"
+                    >
+                      Register
+                    </button>
+                  </div>
+                  <div class="signInInstead"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
