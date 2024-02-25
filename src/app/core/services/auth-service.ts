@@ -12,4 +12,7 @@ export class AuthService {
   registerUser(userDetails:User):Observable<any>{
       return this.http.post(`${this.baseUrl}/user`, userDetails);
   }
+  loginUser(email:String):Observable<User[]>{
+    return this.http.get<User[]>(`${this.baseUrl}/user?email=${email}`);
+  }
 }

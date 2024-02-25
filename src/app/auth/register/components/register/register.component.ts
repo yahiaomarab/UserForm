@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth-service';
 import { confirmPasswordValidation } from 'src/app/core/validators/confirmPassword';
 import { emailValidator } from 'src/app/core/validators/email';
@@ -13,7 +15,7 @@ import { User } from 'src/app/interfaces/user';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private router:Router,private messageService: MessageService) {}
   visiable: boolean = false;
   confirmVisible: boolean = false;
   isRegister: boolean = false;
@@ -65,8 +67,14 @@ export class RegisterComponent {
     const postData = { ...this.formRegister.value };
     delete postData.confirmPassword;
     this.authService.registerUser(postData as User).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
+      (response) =>{
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'user registered successfully' });
+        this.router.navigate(['login']);
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error });
+
+      }
     );
     this.isRegister = true;
   }

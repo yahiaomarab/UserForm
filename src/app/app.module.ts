@@ -7,6 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthModule } from './auth';
 import { HomeComponent } from './non-auth/home/component/home/home.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 
 @NgModule({
   declarations: [
@@ -20,8 +23,9 @@ import { HomeComponent } from './non-auth/home/component/home/home.component';
     HttpClientModule,
     ToastrModule.forRoot(),
     AuthModule,
+    ToastModule,
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
